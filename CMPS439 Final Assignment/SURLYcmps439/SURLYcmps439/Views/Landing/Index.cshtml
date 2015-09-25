@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SURLYcmps439.Models.Relations.RelationsModel>
+
+@{
+    ViewBag.Title = "Relations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="centered">Relations</h2>
+
+@if (Model.FirstOrDefault() != null)
+{
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NameOfRelation)
+        </th>
+        <th></th>
+    </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameOfRelation)
+                </td>
+                <td class="td-btn">
+                    @Html.ActionLink("Details", "Details", "Relation", new { name = item.NameOfRelation }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", "Relation", new { name = item.NameOfRelation }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Destroy", "Destroy", "Relation", new { name = item.NameOfRelation }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+    }
+    else
+    {
+        <h3>No relations in database to display</h3>
+    }
+

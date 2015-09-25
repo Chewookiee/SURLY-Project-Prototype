@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "Seed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Seed</h2>
+
+<h3>
+    Seed method
+</h3>
+<p>
+    This seed method will populate the database with the given RELATIONS and TUPLES
+</p>
+<pre style='color:black'>
+RELATION USER (ID       NUM     11
+               FNAME    CHAR    40
+               LNAME    CHAR    40
+               EMAIL    CHAR    90);
+
+RELATION STYLE (ID           NUM    11
+                STYLENAME    CHAR   40);
+
+RELATION DRINKTYPE (ID      NUM    11
+                    TYPE    CHAR   20);
+
+RELATION COMPANY (ID         NUM    11
+                  NAME       CHAR   40
+                  CITY       CHAR   35
+                  STATE      CHAR   35
+                  COUNTRY    CHAR   70);
+
+RELATION FLAVOR (ID        NUM    11
+                 FLAVOR    CHAR   11);
+
+RELATION DRINK (ID            NUM    11
+                DRINKTYPE     NUM    11
+                NAME          CHAR   60
+                COMPANYID     NUM    11
+                ABV           NUM    2
+                BITTERNESS    NUM    4
+                QUANTITY      NUM    4
+                DESCR         CHAR   255);
+
+RELATION DRINKSTYLE (DRINK      NUM    11
+                     STYLEID    NUM    11);
+
+RELATION DRINKFLAVOR (DRINKID     NUM    11
+                      FLAVORID    NUM    11);
+
+RELATION REVIEW (ID         NUM    11
+                 DRINKID    NUM    11
+                 USERID	    NUM    11
+                 RATING	    NUM    2
+                 NOTES	    CHAR   255);
+INPUT 
+    COMPANY
+        1 'Ayinger Brewery' 'Aying' '(No State)' 'Germany';
+        2 'Gnarly Barley' 'Hammond' 'Louisiana' 'United States of America';
+        3 'Small Town Brewery' 'Wauconda' 'Illinois' 'United States of America';*
+    DRINK
+        1 1 'Celebrator' 1 6 50 60 'Originally brewed at a monastery in northern Italy, double bock was quickly introduced by Bavarian brewers to compete with bock.';
+        2 1 'Radical Rye IPA' 2 7 75 40 'An India Pale Ale coupled with the peppery spice of rye and a big malty backbone. This bad boy is hoppy, spicy, sweet and strong...which we think makes it pretty rad!';
+        3 1 'Catahoula Common' 2 6 22 40 'The Catahoula Common isn’t quite so common. It’s a light colored refreshing lager with the bite of an ale. Its medium body and slight fruitiness from the atypical fermentation temperature creates an enjoyable Louisiana weather brew.';
+        4 1 'Not Your Fathers Root Beer' 3 6 9 12 'Tasting Notes: Silky, smooth and satisfying finish is unmatched in flavor. It appeals to craft beer aficionados as well as those who don’t typically drink beer but crave something unique.';*
+    DRINKFLAVOR
+        1 1;
+        2 2;
+        2 3;
+        2 4;
+        3 5;
+        3 6;
+        4 7;*
+     DRINKSTYLE
+        1 1;
+        2 2;
+        3 3;
+        3 4;
+        4 5;
+        4 6;*
+    DRINKTYPE
+        1 Beer;*
+    FLAVOR
+        1 'Malt';
+        2 'Grapefruit';
+        3 'Piney';
+        4 'Rye';
+        5 'Citrus';
+        6 'Malt';
+        7 'Root Beer';*
+     REVIEW
+        1 1 1 9 'Its a really good beer';
+        2 2 1 8 'Probably the best local IPA in Louisiana';
+        3 3 1 9 'Another fine entry from GB. Catahoula Common for the malt lovers and now Radical Rye PA for those who dig the hops.';
+        4 4 1 10 'I thought it was impossible to make a beer that tastes just like root beer.';
+        5 2 2 5 'Yes and no. If you are thinking about getting it, give it a try.';
+        6 1 2 1 'Thank goodness there was a bathroom...';
+        7 2 3 3 'Meh... OK...';
+        8 2 1 7 'A solid 7.';
+        9 1 2 3 'This time it was not the worst thing I have ever had in my whole life.';
+        10 2 2 6 'OK, I am back...';
+        11 2 2 3 'I just want to stop making reviews!!!';
+        12 1 1 10 'It was alright, 10 out of 10';
+        13 1 3 4 'I will never drink here again!';*
+    STYLE
+        1 'Dopplebock';
+        2 'IPA';
+        3 'California Common';
+        4 'Steam Beer';
+        5 'Herbed';
+        6 'Spiced Beer';*
+    USER
+        1 'Matthew' 'Puneky' 'matthew.puneky@selu.edu';
+        2 'Lee' 'White' 'lwhite@southeastern.edu';
+        3 'Aaron' 'Gross' 'aaron.gross@selu.edu';*
+END_INPUT;
+</pre>
+
+<p>
+    @Html.ActionLink("Back to Relations", "Index")
+</p>

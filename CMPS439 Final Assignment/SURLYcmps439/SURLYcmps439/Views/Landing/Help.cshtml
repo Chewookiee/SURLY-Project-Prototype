@@ -1,0 +1,164 @@
+﻿
+@{
+    ViewBag.Title = "Help";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Help</h2>
+
+<h3>
+    Types
+</h3>
+<p>
+    There are 2 accepted types for column creation
+</p>
+<pre style='color:black'>
+Acceptable Types:
+
+CHAR
+    CHAR is series of characters
+
+NUM
+    NUM is a numerical value
+</pre>
+
+<h3>
+    RELATION
+</h3>
+<p>
+    RELATION will create a relation
+</p>
+<pre style='color:black'>
+RELATION {Relation Name} ({Column Name 1} {Type} {Size}
+                          {Column Name 2} {Type} {Size}
+                          ...
+                          {Column Name n} {Type} {Size});
+
+Relation Create Example:
+            
+    RELATION USER   (ID         CHAR    11
+                     FNAME      CHAR 	40
+                     LNAME      CHAR	40
+                     EMAIL      CHAR	90);
+</pre>
+
+<h3>
+    INSERT
+</h3>
+<p>
+    INSERT will create a new row into a RELATION
+</p>
+<pre style='color:black'>
+INSERT {RELATION} {COLUMN 1 Value} {COLUMN 2 Value} ...{COLUMN n Value};
+
+INSERT Example:
+            
+    INSERT USER 1 'Matthew' 'Puneky' 'matthew.puneky@gmail.com';
+</pre>
+
+<h3>
+    INPUT
+</h3>
+<p>
+    INPUT will add rows into a relation until a "*" is seen, then a new relation is selected to add rows to.  END_INPUT; will end the Input command
+</p>
+<pre style='color:black'>
+INPUT 
+    {RELATION NAME 1} 
+        {COLUMN 1 Value} {COLUMN 2 Value} ...{COLUMN n Value};
+        {COLUMN 1 Value} {COLUMN 2 Value} ...{COLUMN n Value};
+        ...
+        {COLUMN 1 Value} {COLUMN 2 Value} ...{COLUMN n Value};*
+    
+    {RELATION NAME 2}
+        {COLUMN 1 Value} {COLUMN 2 Value} ...{COLUMN n Value};
+        {COLUMN 1 Value} {COLUMN 2 Value} ...{COLUMN n Value};
+        ...
+        {COLUMN 1 Value} {COLUMN 2 Value} ...{COLUMN n Value};*
+
+    ...
+    {RELATION NAME n}
+        {COLUMN 1 Value} {COLUMN 2 Value} ...{COLUMN n Value};
+        {COLUMN 1 Value} {COLUMN 2 Value} ...{COLUMN n Value};
+        ...
+        {COLUMN 1 Value} {COLUMN 2 Value} ...{COLUMN n Value};*
+END_INPUT;
+
+INPUT Example:
+
+    INPUT    
+        USER
+	        1 Matthew Puneky 'matthew.puneky@selu.edu';
+	        2 Lee White 'lwhite@southeastern.edu';
+	        3 Aaron Gross 'aaron.gross@selu.edu';*
+        COMPANY
+	        1 'Ayinger Brewery' 'Aying' '(No State)' 'Germany';
+	        2 'Gnarly Barley' 'Hammond' 'Louisiana' 'United States of America';
+	        3 'Small Town Brewery' 'Wauconda' 'Illinois' 'United States of America';*
+    END_INPUT;
+</pre>
+
+<h3>SELECT</h3>
+<p>
+    SELECT will produce a table given one or many conditional statements
+</p>
+<pre style='color:black'>
+SELECT ({RELATION})
+WHERE({COLUMN} = {VALUE}); // Can be separated by AND and OR
+
+INPUT Example:
+
+    SELECT (REVIEW)
+    WHERE
+    (DRINKID = 2 AND RATING > 6 OR
+    USERID = 2 AND RATING < 4);
+</pre>
+
+<h3>JOIN</h3>
+<p>
+    JOIN will join two tables together.
+</p>
+<pre style='color:black'>
+JOIN({RELATION1} AND {RELATION2}) 
+OVER ({RELATION1 COLUMN} and {RELATION2 COLUMN})
+
+JOIN Example:
+
+    JOIN(USER AND SELECT
+        (REVIEW) WHERE(DRINKID = 2 AND RATING > 6 OR
+        USERID = 2 AND RATING < 4))
+    OVER (ID AND USERID);
+</pre>
+
+<h3>
+    DELETE
+</h3>
+<p>
+    DELETE will remove all rows from a RELATION
+</p>
+<pre style='color:black'>
+DELETE {RELATION};
+
+DELETE Example:
+            
+    DELETE USER;
+</pre>
+
+<h3>
+    DESTROY
+</h3>
+<p>
+    DESTROY will remove all rows from a RELATION and then remove the RELATION from memory
+</p>
+<pre style='color:black'>
+DESTROY {RELATION};
+
+DESTROY Example:
+            
+    DESTROY USER;
+</pre>
+
+
+<p>
+    @Html.ActionLink("Back to Relations", "Index")
+</p>

@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Error Handling";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ErrorHandling</h2>
+
+<h3>Example 1</h3>
+<p>
+    Attempting to use the Type VARCHAR
+</p>
+<pre style='color:black'>
+CODE:
+
+RELATION GAMES (ID      NUM       11
+                NAME    VARCHAR   90);
+</pre>
+
+<h3>Example 2</h3>
+<p>
+    Attempting to put a CHAR into a column that only accepts NUM
+</p>
+<pre style='color:black'>
+CODE:
+
+RELATION GAMES (ID      NUM    11
+                NAME    CHAR   90);
+INSERT GAMES 'One' 'Zelda';
+</pre>
+
+
+<p>
+    @Html.ActionLink("Back to Relations", "Index")
+</p>

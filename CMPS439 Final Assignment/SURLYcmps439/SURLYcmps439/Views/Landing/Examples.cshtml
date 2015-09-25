@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Examples";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Examples</h2>
+<p> Run these after running the Seed </p>
+
+<h3>
+    SELECT example
+</h3>
+<pre style='color:black'>
+>>> Get all reviews where either (the DRINKID = 2 and the RATING > 6) or (the USERID = 2 and the RATING < 4)
+
+CODE:
+
+SELECT (REVIEW)
+WHERE
+(DRINKID = 2 AND RATING > 6 OR
+USERID = 2 AND RATING < 4);
+</pre>
+
+<h3>
+    JOIN example
+</h3>
+<pre style='color:black'>
+>>> Join all drinks to include the company they are from
+
+CODE:
+
+JOIN(DRINK AND COMPANY)
+OVER (COMPANYID AND ID);
+</pre>
+
+<h3>
+    SELECT and JOIN combination example
+</h3>
+<pre style='color:black'>
+>>> Get all reviews where either (the DRINKID = 2 and the RATING > 6) or (the USERID = 2 and the RATING < 4)
+>>> JOIN the USER relation with the result of the statement above against the values of USER.ID and REVIEW.USERID
+
+CODE:
+
+JOIN(USER AND SELECT (REVIEW)
+    WHERE
+    (DRINKID = 2 AND RATING > 6 OR
+    USERID = 2 AND RATING < 4))
+OVER (ID AND USERID);
+</pre>
+
+
+<p>
+    @Html.ActionLink("Back to Relations", "Index")
+</p>
